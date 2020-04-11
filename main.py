@@ -113,7 +113,7 @@ def main():
     final_sgd = train_sgd(X_train, y_train)
 
     # EVALUATION
-    plot_cf_mat(final_svc, X_train, y_train)
+    plot_cf_mat(final_svc, X_test, y_test)
     plot_cf_mat(final_sgd, X_test, y_test)
 
     plot_ovo_roc(final_svc, X_test, y_test)
