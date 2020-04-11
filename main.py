@@ -5,6 +5,7 @@ written by Nicholas Cannon
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler, FunctionTransformer
 from sklearn.svm import SVC
+from sklearn import svm
 from sklearn.multiclass import OneVsOneClassifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.linear_model import SGDClassifier
@@ -70,15 +71,13 @@ def train_sgd(X_train, y_train, save=True):
 
     # NOTE: the SVC estimator is stored as estimator on the OneVsOneClassifier
     # use __ to access properties of nested estimator
-    parameters = [
-        {
-            'estimator__loss': ['log', 'perceptron'],
-            'estimator__penalty': ['l1', 'l2'],
-            'estimator__alpha': [1e-4, 1e-3, 1e-2, 1e-1],
-            'estimator__n_jobs': [-1],
-            'estimator__max_iter': [100000]
-        }
-    ]
+    parameters = [{
+        'estimator__loss': ['log', 'perceptron'],
+        'estimator__penalty': ['l1', 'l2'],
+        'estimator__alpha': [1e-4, 1e-3, 1e-2, 1e-1],
+        'estimator__n_jobs': [-1],
+        'estimator__max_iter': [100000]
+    }]
     sgd_gridsearch = GridSearchCV(
         ovo_sgd, parameters, cv=5, scoring='accuracy')
     sgd_gridsearch.fit(X_train, y_train)
