@@ -5,7 +5,6 @@ written by Nicholas Cannon
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler, FunctionTransformer
 from sklearn.svm import SVC
-from sklearn import svm
 from sklearn.multiclass import OneVsOneClassifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.linear_model import SGDClassifier
@@ -41,7 +40,7 @@ def save_model(model):
 
 
 def train_svc(X_train, y_train, save=True):
-    ovo_svc = OneVsOneClassifier(SVC())
+    ovo_svc = OneVsOneClassifier(SVC(random_state=42))
 
     # NOTE: the SVC estimator is stored as estimator on the OneVsOneClassifier
     # use __ to access properties of nested estimator
@@ -67,7 +66,7 @@ def train_svc(X_train, y_train, save=True):
 
 
 def train_sgd(X_train, y_train, save=True):
-    ovo_sgd = OneVsOneClassifier(SGDClassifier())
+    ovo_sgd = OneVsOneClassifier(SGDClassifier(random_state=42))
 
     # NOTE: the SVC estimator is stored as estimator on the OneVsOneClassifier
     # use __ to access properties of nested estimator
